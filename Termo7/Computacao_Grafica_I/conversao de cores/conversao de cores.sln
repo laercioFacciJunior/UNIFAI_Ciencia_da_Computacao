@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30523.141
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "conversao de cores", "conversao de cores\conversao de cores.csproj", "{4A33C823-5BA2-492F-B50E-2404DD11B37E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A33C823-5BA2-492F-B50E-2404DD11B37E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A33C823-5BA2-492F-B50E-2404DD11B37E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A33C823-5BA2-492F-B50E-2404DD11B37E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A33C823-5BA2-492F-B50E-2404DD11B37E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {376AA7E7-0CEE-4238-8120-25769B7ECE89}
+	EndGlobalSection
+EndGlobal

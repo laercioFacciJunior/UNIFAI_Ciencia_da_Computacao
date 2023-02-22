@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "4a33c823-5ba2-492f-b50e-2404dd11b37e": {
+      "ProjectGuid": "4a33c823-5ba2-492f-b50e-2404dd11b37e",
+      "DisplayName": "conversao de cores",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

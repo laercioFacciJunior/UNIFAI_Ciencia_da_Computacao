@@ -1,0 +1,236 @@
+unit cgu_exe01;
+
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ExtCtrls, Math;
+
+type
+  TForm1 = class(TForm)
+    Button1: TButton;
+    lblR: TLabel;
+    lblG: TLabel;
+    lblB: TLabel;
+    img1: TImage;
+    ImgR: TImage;
+    ImgG: TImage;
+    ImgB: TImage;
+    imgBranco: TImage;
+    Button2: TButton;
+    Button3: TButton;
+    edtX1: TEdit;
+    edtx2: TEdit;
+    edtY1: TEdit;
+    edtY2: TEdit;
+    Button4: TButton;
+    Button5: TButton;
+    procedure img1MouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
+    procedure img1Mouseown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure Button1Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.img1MouseMove(Sender: TObject; Shift: TShiftState; X,
+  Y: Integer);
+begin
+ lblR.Caption := intToStr(
+              getRvalue(img1.canvas.pixels[x,y]));
+
+       lblG.Caption := intToStr(
+              getGvalue(img1.canvas.pixels[x,y]));
+
+       lblB.Caption := intToStr(
+              getBvalue(img1.canvas.pixels[x,y]));
+end;
+
+procedure TForm1.img1Mouseown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+      img1.Canvas.Pixels[x,y] := RGB(0,0,0);
+end;
+
+procedure TForm1.Button1Click(Sender: TObject);
+var x, y, cor : integer;
+begin
+   for x := 0 to img1.Width -1 do
+      for Y := 0 to img1.Height -1 do
+     begin
+           cor := getRValue(img1.Canvas.Pixels[x,y]);
+           imgR.Canvas.Pixels[x,y] := RGB(Cor, 0,0);
+
+           cor := getRValue(img1.Canvas.Pixels[x,y]);
+           imgG.Canvas.Pixels[x,y] := RGB(0, cor,0);
+
+
+           cor := getRValue(img1.Canvas.Pixels[x,y]);
+           imgB.Canvas.Pixels[x,y] := RGB(0, 0,cor);
+     end;
+
+
+end;
+
+procedure TForm1.Button3Click(Sender: TObject);
+var i, x1, x2, y1,y2, length :integer; dx,x, y, dy : double;
+begin
+      x1 := strToint(edtX1.Text);
+      y1 := strToint(edtY1.Text);
+      x2 := strToint(edtX2.Text);
+      y2 := strToint(edtY2.Text);
+
+      if(abs(x2 - x1)>= abs(y2 -y1) ) then
+        length := abs(y2 -y1)
+
+      else
+        length := abs(x2 -x1);
+
+        dx := (x2 -x1) / length;
+        dy := (y2 -y1) / length;
+        x :=  x1 + 0.5;
+        y :=  y1 + 0.5;
+
+        for i :=0  to length do
+
+          begin
+           imgBranco.Canvas.Pixels[trunc(x),trunc(y)] := RGB(0,0,0);
+           x := x + dx;
+            y := y + dy;
+         end;
+
+end;
+
+procedure TForm1.Button2Click(Sender: TObject);    // Bresenham  line
+ var i, x1, x2, y1,y2,dx,x, y, dy, length :integer;  m, e : double;
+begin
+x1 := strToint(edtX1.Text);
+      y1 := strToint(edtY1.Text);
+      x2 := strToint(edtX2.Text);
+      y2 := strToint(edtY2.Text);
+
+       x := x1;
+       y := y1;
+
+       dx := x2 - x1;
+       dy := y2 -y1;
+       m := dy / dx;
+
+       e := m -(1/2);
+
+        for i :=0  to dx do
+        begin
+              imgBranco.Canvas.Pixels[trunc(x),trunc(y)] := RGB(0,0,0);
+
+              while(e>0) do
+              begin
+               y := y + 1;
+               e := e - 1;
+              end;
+              x := x + 1;
+              e := e + m;
+        end;
+end;
+
+procedure TForm1.Button4Click(Sender: TObject);    //  Bresenham interger
+ var i, x1, x2, y1,y2,dx,x, y, dy, length :integer;   e : double;
+begin
+      x1 := strToint(edtX1.Text);
+      y1 := strToint(edtY1.Text);
+      x2 := strToint(edtX2.Text);
+      y2 := strToint(edtY2.Text);
+
+       x := x1;
+       y := y1;
+
+       dx := x2 - x1;
+       dy := y2 -y1;
+
+
+       e := 2 * dy -dx ;
+
+        for i :=1  to dx do
+        begin
+              imgBranco.Canvas.Pixels[trunc(x),trunc(y)] := RGB(0,0,0);
+              while(e>0) do
+              begin
+               y := y + 1;
+               e := e - 2 * dx;
+              end;
+              x := x + 1;
+              e := e + 2 * dy;
+        end;
+end;
+
+procedure TForm1.Button5Click(Sender: TObject);  //general
+ var i, x1, x2, y1,y2,dx,x,temp, y, dy, s1,s2 :integer;   e,  interchange : double;
+begin
+      x1 := strToint(edtX1.Text);
+      y1 := strToint(edtY1.Text);
+      x2 := strToint(edtX2.Text);
+      y2 := strToint(edtY2.Text);
+
+
+       x := x1;
+       y := y1;
+
+       dx := abs(x2 - x);
+       dy := abs(y2 -y1);
+
+       s1 := Sign(x2 -x1);
+       s2 := Sign(y2 -y1);
+
+
+      if(dy > dx) then
+        begin
+        temp := dx;
+        dx := dy;
+        dy := temp;
+        interchange := 1;
+        end
+        else
+        interchange := 0;
+
+          e := 2 * dy -dx ;
+
+
+        for i :=1  to dx do
+        begin
+              imgBranco.Canvas.Pixels[trunc(x),trunc(y)] := RGB(0,0,0);
+              while(e>0) do
+              begin
+                 if(interchange = 1) then
+                      x := x + s1
+                 else
+                 y := y + s2;
+
+                 e := e - 2 * dx;
+              end;
+                if(interchange = 1) then
+                    y := y + s2
+                 else
+                 x := x + s1;
+
+              e := e + 2 * dy;
+        end;
+end;
+
+end.
+
+
+
